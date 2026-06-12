@@ -726,3 +726,12 @@ oxiz-core (foundation)
 - **SMT-COMP 2026 participation** (root TODO.md:238) — gated on SMT-COMP submission portal (opens ~May 2026).
 - **Symbolic execution tool integration** (root TODO.md:239) — vague; re-scope after user selects target (KLEE/angr/S2E).
 - **Verification framework integration** (root TODO.md:240) — vague; re-scope after user selects target (Frama-C/CBMC/SeaHorn).
+
+## Stubs to implement (added 2026-06-12 by /cooljapan-stub-check)
+
+- [ ] `oxiz-theories`: `oxiz-theories/tests/fp_integration.rs:296` — fix `assert_is_normal` constraint encoding to reliably produce SAT for normal-float queries
+  - Priority: P2 | Scope: small | Hint: none
+- [ ] `oxiz-solver`: `oxiz-solver/src/optimization.rs:749` — complete arithmetic theory solving (currently incomplete, returns unknown for many formulae)
+  - Priority: P2 | Scope: large | Hint: none
+- [ ] `oxiz-core`: `oxiz-core/src/qe/datatype/case_analysis.rs:237` — uncomment and wire Term construction in case-analysis QE path once Term API is available
+  - Priority: P2 | Scope: small | Hint: none
