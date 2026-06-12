@@ -106,7 +106,13 @@ pub fn SuffixOf(tm: &PyTermManager, suf: &PyTerm, s: &PyTerm) -> PyTerm {
 pub fn FPSort(tm: &PyTermManager, eb: u32, sb: u32) -> PySort {
     let mut inner = tm.inner.borrow_mut();
     let sort_id = inner.sorts.float_sort(eb, sb);
-    PySort { id: sort_id, eb: Some(eb), sb: Some(sb), is_array: false, is_string: false }
+    PySort {
+        id: sort_id,
+        eb: Some(eb),
+        sb: Some(sb),
+        is_array: false,
+        is_string: false,
+    }
 }
 
 /// Return the string sort object.
@@ -118,7 +124,13 @@ pub fn FPSort(tm: &PyTermManager, eb: u32, sb: u32) -> PySort {
 pub fn StringSort(tm: &PyTermManager) -> PySort {
     let mut inner = tm.inner.borrow_mut();
     let sort_id = inner.sorts.string_sort();
-    PySort { id: sort_id, eb: None, sb: None, is_array: false, is_string: true }
+    PySort {
+        id: sort_id,
+        eb: None,
+        sb: None,
+        is_array: false,
+        is_string: true,
+    }
 }
 
 /// Return an array sort ``Array[index, element]``.
@@ -132,7 +144,13 @@ pub fn StringSort(tm: &PyTermManager) -> PySort {
 pub fn ArraySort(tm: &PyTermManager, index_sort: &PySort, elem_sort: &PySort) -> PySort {
     let mut inner = tm.inner.borrow_mut();
     let sort_id = inner.sorts.array(index_sort.id, elem_sort.id);
-    PySort { id: sort_id, eb: None, sb: None, is_array: true, is_string: false }
+    PySort {
+        id: sort_id,
+        eb: None,
+        sb: None,
+        is_array: true,
+        is_string: false,
+    }
 }
 
 /// Return the integer sort object.
@@ -143,7 +161,13 @@ pub fn ArraySort(tm: &PyTermManager, index_sort: &PySort, elem_sort: &PySort) ->
 #[pyfunction]
 pub fn IntSort(tm: &PyTermManager) -> PySort {
     let inner = tm.inner.borrow();
-    PySort { id: inner.sorts.int_sort, eb: None, sb: None, is_array: false, is_string: false }
+    PySort {
+        id: inner.sorts.int_sort,
+        eb: None,
+        sb: None,
+        is_array: false,
+        is_string: false,
+    }
 }
 
 /// Return the boolean sort object.
@@ -154,7 +178,13 @@ pub fn IntSort(tm: &PyTermManager) -> PySort {
 #[pyfunction]
 pub fn BoolSort(tm: &PyTermManager) -> PySort {
     let inner = tm.inner.borrow();
-    PySort { id: inner.sorts.bool_sort, eb: None, sb: None, is_array: false, is_string: false }
+    PySort {
+        id: inner.sorts.bool_sort,
+        eb: None,
+        sb: None,
+        is_array: false,
+        is_string: false,
+    }
 }
 
 /// Create a floating-point value Term from its components.
@@ -171,7 +201,13 @@ pub fn BoolSort(tm: &PyTermManager) -> PySort {
 ///     sort = oxiz.FPSort(8, 24, tm)
 ///     one  = oxiz.FPVal(False, 127, 0, sort, tm)   # +1.0 in fp32
 #[pyfunction]
-pub fn FPVal(tm: &PyTermManager, sign: bool, exp: i64, sig: u64, sort: &PySort) -> PyResult<PyTerm> {
+pub fn FPVal(
+    tm: &PyTermManager,
+    sign: bool,
+    exp: i64,
+    sig: u64,
+    sort: &PySort,
+) -> PyResult<PyTerm> {
     let (eb, sb) = match (sort.eb, sort.sb) {
         (Some(e), Some(s)) => (e, s),
         _ => {
@@ -277,8 +313,7 @@ pub fn ForAll(tm: &PyTermManager, vars: Vec<(String, String)>, body: &PyTerm) ->
     let parsed: Vec<(String, ::oxiz::core::SortId)> = vars
         .iter()
         .map(|(name, sort_name)| {
-            crate::term::parse_sort_name(&mut inner, sort_name)
-                .map(|sid| (name.clone(), sid))
+            crate::term::parse_sort_name(&mut inner, sort_name).map(|sid| (name.clone(), sid))
         })
         .collect::<PyResult<_>>()?;
     let refs: Vec<(&str, ::oxiz::core::SortId)> =
@@ -304,8 +339,7 @@ pub fn Exists(tm: &PyTermManager, vars: Vec<(String, String)>, body: &PyTerm) ->
     let parsed: Vec<(String, ::oxiz::core::SortId)> = vars
         .iter()
         .map(|(name, sort_name)| {
-            crate::term::parse_sort_name(&mut inner, sort_name)
-                .map(|sid| (name.clone(), sid))
+            crate::term::parse_sort_name(&mut inner, sort_name).map(|sid| (name.clone(), sid))
         })
         .collect::<PyResult<_>>()?;
     let refs: Vec<(&str, ::oxiz::core::SortId)> =

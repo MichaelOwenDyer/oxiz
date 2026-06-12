@@ -173,14 +173,31 @@ impl PyContext {
         let tm_guard = self.tm.borrow(py);
         let mut inner = tm_guard.inner.borrow_mut();
         let sort_id = inner.sorts.float_sort(eb, sb);
-        Ok(PySort { id: sort_id, eb: Some(eb), sb: Some(sb), is_array: false, is_string: false })
+        Ok(PySort {
+            id: sort_id,
+            eb: Some(eb),
+            sb: Some(sb),
+            is_array: false,
+            is_string: false,
+        })
     }
 
     /// Return the array sort ``Array[index_sort, elem_sort]``.
-    fn array_sort(&self, py: Python<'_>, index_sort: &PySort, elem_sort: &PySort) -> PyResult<PySort> {
+    fn array_sort(
+        &self,
+        py: Python<'_>,
+        index_sort: &PySort,
+        elem_sort: &PySort,
+    ) -> PyResult<PySort> {
         let tm_guard = self.tm.borrow(py);
         let mut inner = tm_guard.inner.borrow_mut();
         let sort_id = inner.sorts.array(index_sort.id, elem_sort.id);
-        Ok(PySort { id: sort_id, eb: None, sb: None, is_array: true, is_string: false })
+        Ok(PySort {
+            id: sort_id,
+            eb: None,
+            sb: None,
+            is_array: true,
+            is_string: false,
+        })
     }
 }
