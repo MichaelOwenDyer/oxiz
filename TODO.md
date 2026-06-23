@@ -735,3 +735,14 @@ oxiz-core (foundation)
   - Priority: P2 | Scope: large | Hint: none
 - [ ] `oxiz-core`: `oxiz-core/src/qe/datatype/case_analysis.rs:237` — uncomment and wire Term construction in case-analysis QE path once Term API is available
   - Priority: P2 | Scope: small | Hint: none
+
+## Stubs to implement (added 2026-06-22 by /cooljapan-stub-check)
+
+- [ ] **oxiz** `oxiz-solver`: `oxiz-solver/src/optimization.rs:749` — `TODO`: `Currently arithmetic theory solving is incomplete`
+  - **Priority:** P2  **Scope:** medium  **Cross-project:** none
+  - **Approach:** Complete the integer arithmetic theory in `optimize()` so a model with `x = y ∧ x ≠ y` is correctly returned as Unsat.
+  - **Risk:** Incomplete theory propagation can yield Unknown or unsound Sat results; add targeted regression cases for contradictory integer constraints.
+- [ ] **oxiz** `oxiz-theories`: `oxiz-theories/tests/fp_integration.rs:296` — `TODO`: `Fix constraint encoding in assert_is_normal to reliably produce SAT`
+  - **Priority:** P2  **Scope:** medium  **Cross-project:** none
+  - **Approach:** Repair the floating-point constraint encoding in `assert_is_normal` so exponent/mantissa range constraints are correct and the normal-number assertion reliably solves.
+  - **Risk:** Off-by-one exponent bias or mantissa width errors silently produce Unsat/Unknown; validate against known-normal IEEE-754 values.
