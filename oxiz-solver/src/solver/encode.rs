@@ -7,7 +7,7 @@ use num_traits::{One, ToPrimitive, Zero};
 use oxiz_core::ast::{TermId, TermKind, TermManager};
 use oxiz_sat::{Lit, Var};
 use smallvec::SmallVec;
-
+use oxiz_theories::arithmetic::ArithSolver;
 use super::Solver;
 use super::trail::TrailOp;
 use super::types::{
@@ -50,6 +50,13 @@ impl Solver {
 
                 if is_int || is_real {
                     if !self.arith_terms.contains(&term_id) {
+                        if is_int && !self.arith.is_integer() {
+                            self.arith = ArithSolver::lia();
+                            let existing: Vec<TermId> = self.arith_terms.iter().copied().collect();
+                            for t in existing {
+                                self.arith.intern(t);
+                            }
+                        }
                         self.arith_terms.insert(term_id);
                         self.trail.push(TrailOp::ArithTermAdded { term: term_id });
                         self.arith.intern(term_id);
