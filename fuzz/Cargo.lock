@@ -493,12 +493,13 @@ dependencies = [
 
 [[package]]
 name = "oxiz"
-version = "0.3.0"
+version = "0.3.3"
 dependencies = [
  "num-bigint",
  "num-traits",
  "oxiz-core",
  "oxiz-math",
+ "oxiz-nlsat",
  "oxiz-sat",
  "oxiz-solver",
  "oxiz-theories",
@@ -506,7 +507,7 @@ dependencies = [
 
 [[package]]
 name = "oxiz-core"
-version = "0.3.0"
+version = "0.3.3"
 dependencies = [
  "bumpalo",
  "hashbrown 0.17.1",
@@ -517,6 +518,7 @@ dependencies = [
  "num-rational",
  "num-traits",
  "oxiz-math",
+ "oxiz-time",
  "parking_lot",
  "portable-atomic",
  "portable-atomic-util",
@@ -544,13 +546,14 @@ dependencies = [
 
 [[package]]
 name = "oxiz-math"
-version = "0.3.0"
+version = "0.3.3"
 dependencies = [
  "hashbrown 0.17.1",
  "num-bigint",
  "num-integer",
  "num-rational",
  "num-traits",
+ "oxiz-time",
  "rand",
  "rustc-hash",
  "smallvec",
@@ -559,7 +562,7 @@ dependencies = [
 
 [[package]]
 name = "oxiz-nlsat"
-version = "0.3.0"
+version = "0.3.3"
 dependencies = [
  "num-bigint",
  "num-rational",
@@ -567,6 +570,7 @@ dependencies = [
  "num_cpus",
  "oxiz-core",
  "oxiz-math",
+ "oxiz-time",
  "rayon",
  "rustc-hash",
  "smallvec",
@@ -576,12 +580,13 @@ dependencies = [
 
 [[package]]
 name = "oxiz-proof"
-version = "0.3.0"
+version = "0.3.3"
 dependencies = [
  "num-bigint",
  "num-rational",
  "num-traits",
  "oxiz-core",
+ "oxiz-time",
  "regex",
  "rustc-hash",
  "smallvec",
@@ -591,11 +596,12 @@ dependencies = [
 
 [[package]]
 name = "oxiz-sat"
-version = "0.3.0"
+version = "0.3.3"
 dependencies = [
  "hashbrown 0.17.1",
  "libm",
  "oxiz-core",
+ "oxiz-time",
  "portable-atomic-util",
  "rayon",
  "rustc-hash",
@@ -605,7 +611,7 @@ dependencies = [
 
 [[package]]
 name = "oxiz-solver"
-version = "0.3.0"
+version = "0.3.3"
 dependencies = [
  "hashbrown 0.17.1",
  "num-bigint",
@@ -615,6 +621,7 @@ dependencies = [
  "oxiz-proof",
  "oxiz-sat",
  "oxiz-theories",
+ "oxiz-time",
  "portable-atomic-util",
  "rayon",
  "rustc-hash",
@@ -624,22 +631,28 @@ dependencies = [
 
 [[package]]
 name = "oxiz-theories"
-version = "0.3.0"
+version = "0.3.3"
 dependencies = [
  "egg",
  "hashbrown 0.17.1",
  "num-bigint",
+ "num-integer",
  "num-rational",
  "num-traits",
  "oxiz-core",
  "oxiz-math",
  "oxiz-nlsat",
  "oxiz-sat",
+ "oxiz-time",
  "portable-atomic-util",
  "rustc-hash",
  "smallvec",
  "tracing",
 ]
+
+[[package]]
+name = "oxiz-time"
+version = "0.3.3"
 
 [[package]]
 name = "parking_lot"

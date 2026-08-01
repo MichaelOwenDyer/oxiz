@@ -133,7 +133,7 @@ pub struct Solver {
     /// Current logic
     pub(super) logic: Option<String>,
     /// Assertions
-    pub(super) assertions: Vec<TermId>,
+    pub assertions: Vec<TermId>,
     /// Named assertions for unsat core tracking
     pub(super) named_assertions: Vec<NamedAssertion>,
     /// Assumption literals for unsat core tracking (maps assertion index to assumption var)
